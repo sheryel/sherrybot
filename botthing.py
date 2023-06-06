@@ -45,10 +45,4 @@ async def on_message(message):
         if(message.content == 'your mom'):
             await message.reply('insane burn')
 
-        
-@bot.command(name='upersecretcommand')
-async def upersecretcommand(message):
-    await message.channel.send('you found the secret command yay')
-
-
 bot.run(__THING__)
