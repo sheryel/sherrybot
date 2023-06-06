@@ -1,16 +1,22 @@
+# imports
 from base64 import b64decode
 import discord
 from discord.ext import commands
-from random import randint, random
+from random import randint
 
 
-tokenfile = open('TOKEN', 'r')
-data = tokenfile.readlines()
+datafile = open('TOKEN', 'r')
+data = datafile.readlines()
+
+# reading data
 __THING__ = b64decode(data[0]).decode('utf-8')
 sheryel = int(b64decode(data[1]).decode('utf-8'))
 awex = int(b64decode(data[2]).decode('utf-8'))
 
+
 intents = discord.Intents.all()
+
+
 messages = ['uwu', 'x3', ':3', 'rawr']
 real_spellings = ['real', 'rael', 'rail', 'rewal',
                   'ral', 'rea', 'rel', 'rl', 'rela',
@@ -22,28 +28,33 @@ bot =  commands.Bot(command_prefix='$',intents=intents)
 @bot.event
 async def on_message(message):
     if message.author.id == sheryel:
+
+        # kiss dear awex
         if(message.content == 'kiss boyfie' or message.content == 'kiss awest' or message.content == 'kiss awext'):
             await message.channel.send("*kisses* <@" + str(awex) + "> " + messages[randint(0, 3)])
 
-
+        # i wuv boyfie
         if(message.content == 'i wuv boyfie' or message.content == 'i wuv awest' or message.content == 'i wuv awext'):
             await message.channel.send("i wuv you <@" + str(awex) + "> " + messages[randint(0, 3)])
 
-
+        # pings awex in rate song channel when a sentence with the word rate is used
         if(message.channel.id == 1115319072314372177 and 'rate' in message.content):
             await message.channel.send("<@" + str(awex) + "> " + messages[randint(0, 3)])
 
-
+        # sheryel real preventer
         if(message.content in real_spellings):
             await message.delete()
             await message.channel.send("# stop playing real <@" + str(sheryel) + ">")
 
+        # says hi when stuff
         if((message.content.lower()).strip('!@#$%^&*(){}|:"<>?\'1234567890-=[]\;,./') in 'hihellohellphii'):
             await message.reply('hi')
 
+        # says something in messages when cherry is mentioned
         if((message.content.lower()).strip('!@#$%^&*(){}|:"<>?\'1234567890-=[]\;,./') == 'cherry'):
-            await message.reply('uwu')
+            await message.reply(messages[randint(0, 3)])
 
+        # your mom
         if(message.content == 'your mom'):
             await message.reply('insane burn')
 
