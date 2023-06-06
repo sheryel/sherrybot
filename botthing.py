@@ -1,4 +1,4 @@
-__THING__ = 'MTExNTYxNTcwNDA3MTI4Mjc1MA.GalS3j.e4TlojiLbRwrkQT4TPxA0u8N0gw7PM7bt_lngE'
+__THING__ = 'TOKEN'
 
 
 import discord
