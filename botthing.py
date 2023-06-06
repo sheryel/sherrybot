@@ -1,5 +1,8 @@
-__THING__ = 'TOKEN'
+from base64 import b64decode
 
+tokenfile = open('TOKEN', 'r')
+__THING__ = tokenfile.read()
+__THING__ = b64decode(__THING__).decode('utf-8')
 
 import discord
 from discord.ext import commands
