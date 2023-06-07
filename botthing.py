@@ -3,9 +3,11 @@ from base64 import b64decode
 import discord
 from discord.ext import commands
 from random import randint
+from pathlib import Path
 
+tokenpath = Path(__file__).parent.resolve() + '/TOKEN'
 
-datafile = open('TOKEN', 'r')
+datafile = open(tokenpath, 'r')
 data = datafile.readlines()
 
 # reading data
