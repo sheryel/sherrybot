@@ -5,18 +5,25 @@ from discord.ext import commands
 from random import randint
 from pathlib import Path
 
-tokenpath = Path(__file__).parent.resolve() + '/TOKEN'
+tokenpath = str(Path(__file__).parent.resolve()) + '/TOKEN'
+datapath = str(Path(__file__).parent.resolve()) + '/MUSHDATA'
 
-datafile = open(tokenpath, 'r')
-data = datafile.readlines()
+usrdatafile = open(tokenpath, 'r')
+usrdata = usrdatafile.readlines()
+
+
+mushdatafile = open(datapath, 'r')
+mushdata = mushdatafile.readlines()
+mushdatafile.close()
+
 
 # reading data
-__THING__ = b64decode(data[0]).decode('utf-8')
-sheryel = int(b64decode(data[1]).decode('utf-8'))
-awex = int(b64decode(data[2]).decode('utf-8'))
+__THING__ = b64decode(usrdata[0]).decode('utf-8')
+sheryel = int(b64decode(usrdata[1]).decode('utf-8'))
+awex = int(b64decode(usrdata[2]).decode('utf-8'))
 
 
-intents = discord.Intents.all()
+mushroomnum = int(mushdata[0])
 
 
 messages = ['uwu', 'x3', ':3', 'rawr']
@@ -25,7 +32,14 @@ real_spellings = ['real', 'rael', 'rail', 'rewal',
                   'rale', 'relea', 'rele', 'rala',
                   'eal', 'rewel']
 
-bot =  commands.Bot(command_prefix='$',intents=intents)
+intents = discord.Intents.all()
+
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+@bot.command(name='test')
+async def a0(ctx, *, arg):
+    print('real')
+    await ctx.send(arg)
 
 @bot.event
 async def on_message(message):
@@ -63,5 +77,15 @@ async def on_message(message):
     if message.author.id == 1114730963600150528 and message.content == 'no' and message.channel.id == 1115319072314372177:
         await message.delete()
         await message.channel.send("<@" + str(awex) + "> " + messages[randint(0, 3)])
+
+    if message.content == "🍄":
+        await message.reply('mushroom +1')
+        global mushroomnum
+        mushroomnum += 1
+        mushdatafile = open(datapath, 'w')
+        mushdatafile.truncate(0)
+        mushdatafile.write(str(mushroomnum))
+        mushdatafile.close()
+        
 
 bot.run(__THING__)
