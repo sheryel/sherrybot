@@ -57,5 +57,9 @@ async def on_message(message):
         # your mom
         if(message.content == 'your mom'):
             await message.reply('insane burn')
+    
+    if message.author.id == 1114730963600150528 and message.content == 'no' and message.channel.id == 1115319072314372177:
+        await message.delete()
+        await message.channel.send("<@" + str(awex) + "> " + messages[randint(0, 3)])
 
 bot.run(__THING__)
