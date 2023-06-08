@@ -8,7 +8,7 @@ import json
 
 datapath = str(Path(__file__).parent.resolve()) + '/data.json'
 
-usrdatafile = open(datapath, 'r')
+usrdatafile = open(datapath, 'r+')
 usrdata = json.load(usrdatafile)
 
 
