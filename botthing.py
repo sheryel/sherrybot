@@ -78,6 +78,7 @@ async def on_message(message):
         if message.content == "mushrooms":
             await message.channel.send(str(mushrooms) + "mushrooms")
 
-        
+
+
 
 bot.run(__THING__)
