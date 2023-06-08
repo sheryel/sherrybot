@@ -4,18 +4,19 @@ import discord
 from discord.ext import commands
 from random import randint
 from pathlib import Path
+import json
 
-tokenpath = str(Path(__file__).parent.resolve()) + '/TOKEN'
-datapath = str(Path(__file__).parent.resolve()) + '/MUSHDATA'
+datapath = str(Path(__file__).parent.resolve()) + '/data.json'
 
-usrdatafile = open(tokenpath, 'r')
-usrdata = usrdatafile.readlines()
+usrdatafile = open(datapath, 'r')
+usrdata = json.load(usrdatafile)
 
 
 # reading data
-__THING__ = b64decode(usrdata[0]).decode('utf-8')
-sheryel = int(b64decode(usrdata[1]).decode('utf-8'))
-awex = int(b64decode(usrdata[2]).decode('utf-8'))
+__THING__ = usrdata["token"]
+sheryel = usrdata["sheryel"]
+awex = usrdata["awex"]
+mushrooms = int(usrdata["mushrooms"])
 
 messages = ['uwu', 'x3', ':3', 'rawr']
 real_spellings = ['real', 'rael', 'rail', 'rewal',
@@ -29,6 +30,7 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 
 @bot.event
 async def on_message(message):
+    json.dump(usrdata, usrdatafile)
     if not message.author.id == 1115615704071282750:
         if message.author.id == sheryel:
 
@@ -70,7 +72,11 @@ async def on_message(message):
 
         if message.content == "🍄":
             await message.reply('mushroom')
+            mushrooms += + 1
+            usrdata["mushrooms"] = mushrooms
         
+        if message.content == "mushrooms":
+            await message.channel.send(str(mushrooms) + "mushrooms")
 
         
 
