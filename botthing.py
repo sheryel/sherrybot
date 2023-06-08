@@ -50,8 +50,11 @@ async def on_message(message):
             await message.channel.send("*kisses* <@" + str(awex) + "> " + messages[randint(0, 3)])
 
         # i wuv boyfie
-        if(message.content == 'i wuv boyfie' or message.content == 'i wuv awest' or message.content == 'i wuv awext'):
+        if(message.content == 'i wuv boyfie' or message.content == 'i wuv awest' or message.content == 'i wuv awext' or message.content == 'wuv awext' or message.content == 'wuv awest' or message.content == 'wuv boyfie'):
             await message.channel.send("i wuv you <@" + str(awex) + "> " + messages[randint(0, 3)])
+
+        if message.content == 'eep' or message.content == 'sleep' or message.content == 'sleepy':
+            await message.channel.send("i eep <@" + str(awex) + "> " + messages[randint(0, 3)])
 
         # pings awex in rate song channel when a sentence with the word rate is used
         if(message.channel.id == 1115319072314372177 and 'rate' in message.content):
@@ -63,7 +66,7 @@ async def on_message(message):
             await message.channel.send("# stop playing real <@" + str(sheryel) + ">")
 
         # says hi when stuff
-        if((message.content.lower()).strip('!@#$%^&*(){}|:"<>?\'1234567890-=[]\;,./') in 'hihellohellphii'):
+        if((message.content.lower()).strip('!@#$%^&*(){}|:"<>?\'1234567890-=[]\;,./') in ['hi', 'hello', 'hellp', 'hii']):
             await message.reply('hi')
 
         # says something in messages when cherry is mentioned
