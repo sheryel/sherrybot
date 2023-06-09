@@ -30,6 +30,7 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 
 @bot.event
 async def on_message(message):
+    usrdatafile.truncate(0)
     json.dump(usrdata, usrdatafile)
     if not message.author.id == 1115615704071282750:
         if message.author.id == sheryel:
