@@ -13,10 +13,29 @@ backuppath = f'{Path(__file__).parent.resolve()}/.backupdata'
 with open(datapath, 'r+') as usrdatafile:
     usrdata = json.load(usrdatafile)
 
-__TOKEN__ = str(usrdata["token"])
-sheryel = int(usrdata["sheryel"])
-awex = int(usrdata["awex"])
-mushrooms = int(usrdata["mushrooms"])
+
+def backup():
+    copyfile(backuppath, datapath)
+
+def restorebackup():
+    copyfile(datapath, backuppath)
+
+def writedata():
+    with open(datapath, 'w') as usrdatafile:
+        usrdatafile.truncate(0)
+        json.dump(usrdata, usrdatafile)
+
+def normalize_message(content):
+    return sub(r'[^\w\s]', '', content.strip().lower())
+
+try:
+    __TOKEN__ = str(usrdata["token"])
+    sheryel = int(usrdata["sheryel"])
+    awex = int(usrdata["awex"])
+    mushrooms = int(usrdata["mushrooms"])
+except Exception as e:
+    print(str(e))
+    restorebackup()
 
 messages = ('uwu', 'x3', ':3', 'rawr')
 real_spellings = {
@@ -64,19 +83,6 @@ awestpings = (
 intents = discord.Intents.all()
 
 bot = commands.Bot(command_prefix='$', intents=intents)
-
-
-def backup():
-    copyfile(backuppath, datapath)
-
-def normalize_message(content):
-    return sub(r'[^\w\s]', '', content.strip().lower())
-
-def writedata():
-    with open(datapath, 'w') as usrdatafile:
-        usrdatafile.truncate(0)
-        json.dump(usrdata, usrdatafile)
-
 
 @bot.event
 async def on_message(message):
