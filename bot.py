@@ -6,6 +6,14 @@ from pathlib import Path
 import json
 from shutil import copyfile
 from re import sub
+from datetime import datetime
+from pytz import timezone
+
+
+current_time = datetime.now(timezone('Asia/Singapore'))
+print(current_time)
+starttime = current_time.replace(hour=0, minute=0, second=0, microsecond=0)
+endtime = current_time.replace(hour=5, minute=0, second=0, microsecond=0)
 
 datapath = f'{Path(__file__).parent.resolve()}/data.json'
 backuppath = f'{Path(__file__).parent.resolve()}/.backupdata'
@@ -80,6 +88,12 @@ awestpings = (
     f"*kisses* <@{awex}>"
 )
 
+greetings = (
+    "hi",
+    "hello",
+    "hewwo"
+)
+
 intents = discord.Intents.all()
 
 bot = commands.Bot(command_prefix='$', intents=intents)
@@ -140,7 +154,11 @@ async def pingawex():
         channel = bot.get_channel(1112322137554960465)
         await channel.send(choice(awestpings))
 
-
+@tasks.loop(hours=0.5)
+async def sayhello():
+    if random < 0.5:
+        channel = bot.get_channel(1112322137554960465)
+        await channel.send(choice(greetings))
 
 
 bot.run(__TOKEN__)
